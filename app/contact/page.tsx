@@ -15,6 +15,8 @@ const inquiryTypes = [
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
     company: "",
@@ -31,10 +33,26 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: Notion API 経由で DB に送信する
-    setSubmitted(true);
+    setSubmitting(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error ?? "送信に失敗しました");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "送信に失敗しました");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -253,11 +271,16 @@ export default function ContactPage() {
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-foreground text-background rounded-full px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity duration-300"
+                    disabled={submitting}
+                    className="w-full inline-flex items-center justify-center gap-2 bg-foreground text-background rounded-full px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    送信する
-                    <ArrowRight className="w-4 h-4" />
+                    {submitting ? "送信中..." : "送信する"}
+                    {!submitting && <ArrowRight className="w-4 h-4" />}
                   </button>
+
+                  {error && (
+                    <p className="text-xs text-center text-red-500">{error}</p>
+                  )}
 
                   <p className="text-xs text-muted-foreground text-center leading-relaxed">
                     送信いただいた情報はお問い合わせへの返信のみに使用します。

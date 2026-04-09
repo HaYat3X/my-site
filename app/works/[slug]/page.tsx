@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { Header } from "@/app/components/header";
+import { Footer } from "@/app/components/footer";
 import { getAllWorks, getWork } from "@/lib/works";
 
 export async function generateStaticParams() {
@@ -93,16 +94,7 @@ export default async function WorkPage({
         </div>
       </main>
 
-      <footer className="border-t border-border py-8">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">
-            © 2025 Hayate Takeda
-          </span>
-          <span className="text-xs text-muted-foreground">
-            Built with Next.js
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

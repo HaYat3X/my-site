@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { Header } from "../components/header";
+import { Footer } from "../components/footer";
 import { getNoteArticles, formatDate } from "@/lib/note";
 
 export const revalidate = 3600;
@@ -120,16 +121,7 @@ export default async function BlogPage() {
         </div>
       </main>
 
-      <footer className="border-t border-border py-8">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">
-            © 2025 Hayate Takeda
-          </span>
-          <span className="text-xs text-muted-foreground">
-            Built with Next.js
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

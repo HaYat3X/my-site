@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Mail, Clock, CheckCircle2 } from "lucide-react";
 import { Header } from "../components/header";
+import { Footer } from "../components/footer";
 
 const inquiryTypes = [
   { value: "", label: "選択してください" },
@@ -292,16 +293,7 @@ export default function ContactPage() {
         </div>
       </main>
 
-      <footer className="border-t border-border py-8">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">
-            © 2025 Hayate Takeda
-          </span>
-          <span className="text-xs text-muted-foreground">
-            Built with Next.js
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

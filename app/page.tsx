@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Header } from "./components/header";
+import { Footer } from "./components/footer";
 
 export default function Home() {
   return (
@@ -84,17 +85,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-8">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">
-            © 2025 Hayate Takeda
-          </span>
-          <span className="text-xs text-muted-foreground">
-            Built with Next.js
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

@@ -1,9 +1,52 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { Header } from "./components/header";
 import { Footer } from "./components/footer";
+import { getAllWorks } from "@/lib/works";
+import { getNoteArticles, formatDate } from "@/lib/note";
 
-export default function Home() {
+const sns = [
+  {
+    label: "GitHub",
+    href: "https://github.com/hayate-takeda",
+    icon: ExternalLink,
+    handle: "@hayate-takeda",
+  },
+  {
+    label: "X (Twitter)",
+    href: "https://x.com/hayate_takeda",
+    icon: ExternalLink,
+    handle: "@hayate_takeda",
+  },
+  {
+    label: "Zenn",
+    href: "https://zenn.dev/hayate_takeda",
+    icon: ExternalLink,
+    handle: "hayate_takeda",
+  },
+];
+
+const skills = [
+  {
+    category: "Frontend",
+    items: ["TypeScript", "React", "Next.js", "Tailwind CSS"],
+  },
+  { category: "Backend", items: ["Node.js", "Python", "REST API", "SQL"] },
+  {
+    category: "Process",
+    items: ["要件定義", "基本設計", "詳細設計", "ユーザーテスト"],
+  },
+  { category: "Domain", items: ["航空", "電力", "製造", "公共DX"] },
+];
+
+export const revalidate = 3600;
+
+export default async function Home() {
+  const works = getAllWorks().slice(0, 3);
+  const articles = await getNoteArticles().catch(() => []);
+  const recentArticles = articles.slice(0, 3);
+
   return (
     <>
       <Header />
@@ -80,6 +123,250 @@ export default function Home() {
                 About
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-300" />
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Works ── */}
+        <section className="py-24 lg:py-32 border-t border-foreground/5">
+          <div className="max-w-6xl mx-auto px-6 lg:px-8">
+            <div className="flex items-end justify-between mb-10">
+              <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
+                Works
+              </p>
+              <Link
+                href="/works"
+                className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+              >
+                すべての実績
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
+              </Link>
+            </div>
+
+            <div className="space-y-4">
+              {works.map((work, index) => (
+                <Link
+                  key={work.slug}
+                  href={`/works/${work.slug}`}
+                  className="group flex border border-foreground/5 hover:border-foreground/10 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
+                >
+                  {/* Number sidebar */}
+                  <div className="flex items-center justify-center w-16 flex-shrink-0 bg-foreground/[0.02] border-r border-foreground/5 text-sm font-medium text-muted-foreground select-none">
+                    {String(index + 1).padStart(2, "0")}
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 px-6 py-5 flex items-center justify-between gap-6 min-w-0">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-2 flex-wrap">
+                        <span className="text-xs text-muted-foreground">
+                          {work.area}
+                        </span>
+                        <span className="w-px h-3 bg-foreground/10 shrink-0" />
+                        <span className="text-xs text-muted-foreground">
+                          {work.phase}
+                        </span>
+                        <span className="w-px h-3 bg-foreground/10 shrink-0" />
+                        <span className="text-xs text-muted-foreground">
+                          {work.period}
+                        </span>
+                      </div>
+                      <h2 className="text-lg lg:text-xl font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                        {work.title}
+                      </h2>
+                      {work.summary && (
+                        <p className="text-sm text-muted-foreground leading-relaxed mt-1.5 line-clamp-2">
+                          {work.summary}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="flex-shrink-0 w-9 h-9 rounded-full border border-foreground/10 flex items-center justify-center group-hover:bg-foreground group-hover:border-foreground transition-all duration-300">
+                      <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-background transition-colors duration-300" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Blog ── */}
+        <section className="py-24 lg:py-32 border-t border-foreground/5">
+          <div className="max-w-6xl mx-auto px-6 lg:px-8">
+            <div className="flex items-end justify-between mb-10">
+              <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
+                Blog
+              </p>
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+              >
+                すべての記事
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
+              </Link>
+            </div>
+
+            {recentArticles.length === 0 ? (
+              <p className="text-sm text-muted-foreground">
+                記事を取得できませんでした。
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {recentArticles.map((article) => (
+                  <a
+                    key={article.link}
+                    href={article.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col border border-foreground/5 hover:border-foreground/10 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
+                  >
+                    {/* Thumbnail */}
+                    <div className="relative aspect-[16/9] bg-foreground/[0.02] border-b border-foreground/5 overflow-hidden">
+                      {article.thumbnail ? (
+                        <Image
+                          src={article.thumbnail}
+                          alt={article.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div
+                            className="absolute inset-0 opacity-40"
+                            style={{
+                              backgroundImage:
+                                "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
+                              backgroundSize: "24px 24px",
+                            }}
+                          />
+                          <span className="relative text-4xl select-none">
+                            📝
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex flex-col flex-1 px-5 py-4 gap-3">
+                      <h2 className="text-base font-semibold leading-snug line-clamp-2 group-hover:translate-x-0.5 transition-transform duration-300">
+                        {article.title}
+                      </h2>
+                      {article.summary && (
+                        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 flex-1">
+                          {article.summary}
+                        </p>
+                      )}
+                      <div className="flex items-center justify-between mt-auto pt-1">
+                        <span className="text-xs text-muted-foreground">
+                          {formatDate(article.pubDate)}
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground bg-foreground/5 rounded-full px-2.5 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          note
+                          <ExternalLink className="w-3 h-3" />
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ── Profile ── */}
+        <section className="py-24 lg:py-32 border-t border-foreground/5">
+          <div className="max-w-6xl mx-auto px-6 lg:px-8">
+            <div className="flex items-end justify-between mb-10">
+              <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
+                Profile
+              </p>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+              >
+                詳細プロフィール
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+              {/* Profile */}
+              <div>
+                {/* Avatar + name */}
+                <div className="flex items-center gap-4 mb-6">
+                  {/* Avatar placeholder — replace src with actual photo */}
+                  <div className="w-16 h-16 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center flex-shrink-0 text-xl font-bold select-none">
+                    H
+                  </div>
+                  <div>
+                    <p className="text-base font-semibold">Hayate Takeda</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      24歳 / フリーランスエンジニア
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-4 text-sm text-muted-foreground leading-relaxed mb-8">
+                  <p>
+                    独立系SIerにてキャリアをスタート。航空・電力・製造業界を中心に、
+                    業務システムの要件定義から設計・開発・運用保守まで一貫して担当。
+                  </p>
+                  <p>
+                    上流工程では業務ヒアリングや要件整理を主導し、下流工程では
+                    フロントエンド〜バックエンドを横断して実装。
+                    「なんでもできる一人目」の動き方を得意とします。
+                  </p>
+                  <p>
+                    現在はフリーランスとして活動中。DXの文脈でスクラッチ開発から
+                    既存システムのリプレイスまで、幅広い案件に対応しています。
+                  </p>
+                </div>
+
+                {/* SNS links */}
+                <div className="flex flex-col gap-2">
+                  {sns.map(({ label, href, icon: Icon, handle }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group w-fit"
+                    >
+                      <Icon className="w-4 h-4 flex-shrink-0" />
+                      <span className="font-medium">{label}</span>
+                      <span className="text-xs text-muted-foreground/60 group-hover:text-muted-foreground transition-colors duration-300">
+                        {handle}
+                      </span>
+                      <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Skills */}
+              <div>
+                <div className="space-y-6">
+                  {skills.map((s) => (
+                    <div key={s.category}>
+                      <p className="text-xs text-muted-foreground mb-2">
+                        {s.category}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {s.items.map((item) => (
+                          <span
+                            key={item}
+                            className="inline-block text-xs font-medium bg-foreground/5 border border-foreground/5 rounded-full px-3 py-1"
+                          >
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

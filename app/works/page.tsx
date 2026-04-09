@@ -82,6 +82,32 @@ export default function WorksPage() {
               ))}
             </div>
           </div>
+
+          {/* CTA */}
+          <div className="border-t border-foreground/5 pt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="flex-1">
+              <p className="text-lg font-semibold mb-1">一緒に働きませんか</p>
+              <p className="text-sm text-muted-foreground">
+                現在、新規案件のご相談を受け付けています。
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity duration-300"
+              >
+                お問い合わせ
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/works"
+                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+              >
+                実績を見る
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-300" />
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
 

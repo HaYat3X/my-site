@@ -57,7 +57,9 @@ export default function Home() {
                   <br />
                   〜運用
                 </p>
-                <p className="text-xs text-muted-foreground mt-1">対応フェーズ</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  対応フェーズ
+                </p>
               </div>
             </div>
 

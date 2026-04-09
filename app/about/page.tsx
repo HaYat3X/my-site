@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { ExternalLink } from "lucide-react";
 import { Header } from "../components/header";
@@ -112,10 +113,7 @@ export default function AboutPage() {
 
               {/* Avatar + name */}
               <div className="flex items-center gap-4 mb-6">
-                {/* Avatar placeholder — replace src with actual photo */}
-                <div className="w-16 h-16 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center flex-shrink-0 text-xl font-bold select-none">
-                  H
-                </div>
+                <Image src="/me.png" alt="Hayate Takeda" width={64} height={64} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
                 <div>
                   <p className="text-base font-semibold">Hayate Takeda</p>
                   <p className="text-xs text-muted-foreground mt-0.5">

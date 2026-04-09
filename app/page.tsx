@@ -60,12 +60,12 @@ export default async function Home() {
 
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             {/* Available badge */}
-            <div className="inline-flex items-center gap-2 bg-foreground/5 border border-foreground/10 rounded-full px-4 py-2 mb-10">
+            {/* <div className="inline-flex items-center gap-2 bg-foreground/5 border border-foreground/10 rounded-full px-4 py-2 mb-10">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
               <span className="text-xs font-medium text-muted-foreground">
                 Available for new projects
               </span>
-            </div>
+            </div> */}
 
             {/* Heading */}
             <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.1] mb-6">
@@ -296,10 +296,13 @@ export default async function Home() {
               <div>
                 {/* Avatar + name */}
                 <div className="flex items-center gap-4 mb-6">
-                  {/* Avatar placeholder — replace src with actual photo */}
-                  <div className="w-16 h-16 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center flex-shrink-0 text-xl font-bold select-none">
-                    H
-                  </div>
+                  <Image
+                    src="/me.png"
+                    alt="Hayate Takeda"
+                    width={64}
+                    height={64}
+                    className="w-16 h-16 rounded-full object-cover flex-shrink-0"
+                  />
                   <div>
                     <p className="text-base font-semibold">Hayate Takeda</p>
                     <p className="text-xs text-muted-foreground mt-0.5">

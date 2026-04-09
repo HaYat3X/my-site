@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Header() {
   return (
@@ -10,9 +11,7 @@ export function Header() {
             href="/"
             className="flex items-center gap-3 hover:opacity-70 transition-opacity duration-300"
           >
-            <div className="w-8 h-8 bg-foreground text-background rounded-lg flex items-center justify-center text-sm font-bold select-none">
-              H
-            </div>
+            <Image src="/logo.png" alt="Hayate Takeda" width={32} height={32} className="rounded-lg" />
             <span className="font-medium text-sm">Hayate Takeda</span>
           </Link>
 

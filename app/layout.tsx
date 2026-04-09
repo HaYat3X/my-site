@@ -13,7 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hayate Takeda — Portfolio",
+  title: "Hayate Takeda - Portfolio",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   description:
     "公共・製造DX領域において、要件定義から設計・開発・納品まで一人で主導できるエンジニアのポートフォリオ。",
 };

@@ -24,7 +24,18 @@ npm run lint     # Run ESLint
 
 ## Architecture
 
-This is a freelance portfolio site. Pages planned: Home (Hero), Works, About, Zenn RSS feed section, Contact.
+This is a freelance portfolio site.
+
+**Pages (implemented)**:
+- `/` — Home: Hero + Works preview + Zenn RSS + CTA
+- `/works` — Works list (MDX-driven)
+- `/works/[slug]` — Works detail (MDX)
+- `/about` — About
+- `/blog` — Blog (Zenn RSS)
+- `/contact` — Contact form
+- `/privacy` — Privacy policy
+
+**Shared components**: `app/components/header.tsx`, `app/components/footer.tsx`
 
 **Content management**: Works case studies live in `content/works/` as individual MDX files with frontmatter:
 ```
@@ -35,7 +46,9 @@ phase: 要件定義〜運用
 period: 2025.05〜現在
 ---
 ```
-Body uses Before→Action→After structure.
+Body uses Before→Action→After structure. Current files: `cloud-infra-migration.mdx`, `manufacturing-dx-requirements.mdx`, `strapi-cms-replace.mdx`
+
+**API routes**: `app/api/contact/` — Contact form → Notion DB integration
 
 **Zenn RSS**: Fetched at build time from `https://zenn.dev/[username]/feed` with ISR `revalidate: 3600`.
 

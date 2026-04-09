@@ -25,6 +25,12 @@ export function Header() {
               Works
             </Link>
             <Link
+              href="/blog"
+              className="px-4 py-2 text-sm text-muted-foreground rounded-full hover:bg-foreground/5 transition-colors duration-300"
+            >
+              Blog
+            </Link>
+            <Link
               href="/about"
               className="px-4 py-2 text-sm text-muted-foreground rounded-full hover:bg-foreground/5 transition-colors duration-300"
             >

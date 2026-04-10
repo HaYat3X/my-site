@@ -8,7 +8,7 @@ import { getNoteArticles, formatDate } from "@/lib/note";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Blog — Hayate Takeda",
+  title: "Blog - Hayate Takeda",
   description: "note に投稿した記事の一覧です。",
 };
 
@@ -19,7 +19,7 @@ export default async function BlogPage() {
     <>
       <Header />
 
-      <main className="flex-1 pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <main className="flex-1 pt-32 pb-6 lg:pt-40">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           {/* Page header */}
           <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">
@@ -30,6 +30,7 @@ export default async function BlogPage() {
           </h1>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-24">
             note に投稿した記事の一覧です。
+            <br />
             公共・製造DXの現場知識からキャリア・技術トピックまで幅広く書いています。
           </p>
 
@@ -105,19 +106,6 @@ export default async function BlogPage() {
               ))}
             </div>
           )}
-
-          {/* Link to note */}
-          <div className="border-t border-foreground/5 pt-12 flex items-center gap-3">
-            <a
-              href="https://note.com/hayatetakeda"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group"
-            >
-              note ですべての記事を見る
-              <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-300" />
-            </a>
-          </div>
         </div>
       </main>
 

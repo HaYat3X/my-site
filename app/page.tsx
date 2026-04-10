@@ -279,7 +279,7 @@ export default async function Home() {
 
             <div>
               {/* Avatar + name + SNS icons */}
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex gap-4 mb-8">
                 <Image
                   src="/me.png"
                   alt="Hayate Takeda"
@@ -288,26 +288,27 @@ export default async function Home() {
                   className="w-16 h-16 rounded-full object-cover flex-shrink-0"
                 />
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-1">
-                    <p className="text-base font-semibold">Hayate Takeda</p>
-                    <div className="flex items-center gap-2">
-                      {sns.map(({ label, href, icon: Icon }) => (
-                        <a
-                          key={label}
-                          href={href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-                          title={label}
-                        >
-                          <Icon className="w-4 h-4" />
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-base font-semibold mb-1">Hayate Takeda</p>
+                  <p className="text-xs text-muted-foreground mb-2">
                     22歳 / GISエンジニア・バックエンドエンジニア
                   </p>
+                  <div className="flex items-center gap-2">
+                    {sns.map(({ label, href, icon: Icon }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-foreground transition-colors duration-300 relative group"
+                        aria-label={label}
+                      >
+                        <Icon className="w-4 h-4" />
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-foreground text-background text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                          {label}
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
 

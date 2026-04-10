@@ -29,7 +29,7 @@ export default function ContactPage() {
   function handleChange(
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -71,6 +71,7 @@ export default function ContactPage() {
           </h1>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-24">
             新規案件のご相談・技術顧問など、お気軽にご連絡ください。
+            <br />
             内容を確認次第、2営業日以内にご返信いたします。
           </p>
 
@@ -112,9 +113,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium mb-0.5">返信目安</p>
-                    <p className="text-sm text-muted-foreground">
-                      2営業日以内
-                    </p>
+                    <p className="text-sm text-muted-foreground">2営業日以内</p>
                   </div>
                 </div>
               </div>
@@ -132,7 +131,9 @@ export default function ContactPage() {
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-muted-foreground">{item}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {item}
+                    </span>
                   </div>
                 ))}
               </div>

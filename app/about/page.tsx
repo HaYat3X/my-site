@@ -29,18 +29,27 @@ const sns = [
 const values = [
   {
     label: "01",
-    title: "プロジェクトを「前に進める」を最優先にする",
-    body: "技術的な完璧さより、プロジェクトが一歩前進することを優先します。要件が曖昧なまま止まるより、仮説を立てて動き、フィードバックから学ぶ。エンジニアとしての価値は、コードの行数でも使った技術の新しさでもなく、ビジネス課題を解決したかどうかだと思っています。",
+    title: "技術は手段。プロジェクトを前に進めることが仕事だと思っている",
+    body: [
+      "使った技術の新しさより、課題が一つ解決されたかどうかを優先する。",
+      "要件が曖昧なまま止まるより、仮説を立てて動いてフィードバックから学ぶ。",
+    ],
   },
   {
     label: "02",
-    title: "「わからない」を放置しない",
-    body: "仕様の曖昧さ、業務知識のギャップ、技術的な不確かさ——すべて早めに潰します。不明点を抱えたまま実装を進めると、後工程で何倍もの手戻りになる。だから質問を恥とは思わず、むしろ「早く潰せた」と前向きに捉えます。",
+    title: "技術は目的じゃない。課題を解くための道具として使う",
+    body: [
+      "「この技術を使いたいから採用する」ではなく、「この課題を解くために何が適切か」から考える。",
+      "現場の業務を理解してから設計する。コードを書く前に、業務を書けるようになることを意識している。",
+    ],
   },
   {
     label: "03",
-    title: "ドメインを理解してから設計する",
-    body: "航空・電力・製造といった現場を持つ業界では、業務フローへの理解なしに良いシステムは作れません。ユーザーの言葉を聞き、現場の制約を把握し、その上で技術的な答えを出す。コードを書く前に、業務を書けるようになることを意識しています。",
+    title: "指示を待たず、自分で作業を取りにいく",
+    body: [
+      "言われたことだけをやっていても、プロジェクトは前に進まない。",
+      "必要だと思ったことは、誰かに言われる前に動く。要件定義も、技術検証も、そうやって自分のものにしてきた。",
+    ],
   },
 ];
 
@@ -66,13 +75,14 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           {/* Page header */}
           <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">
-            About
+            About Me
           </p>
           <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-6">
             エンジニアリングへの想い
           </h1>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-24">
             要件定義から運用まで一人で主導できるエンジニアを目指しています。
+            <br />
             技術は手段であり、目的は常に「現場の課題を解決すること」です。
           </p>
 
@@ -88,15 +98,22 @@ export default function AboutPage() {
                   className="flex border border-foreground/5 rounded-lg shadow-sm overflow-hidden"
                 >
                   {/* Number sidebar */}
-                  <div className="flex items-start justify-center w-16 flex-shrink-0 bg-foreground/[0.02] border-r border-foreground/5 pt-6 text-sm font-medium text-muted-foreground select-none">
+                  <div className="flex items-center justify-center w-16 flex-shrink-0 bg-foreground/[0.02] border-r border-foreground/5 text-sm font-medium text-muted-foreground select-none">
                     {v.label}
                   </div>
                   {/* Content */}
                   <div className="flex-1 px-6 py-5">
                     <h2 className="text-lg font-semibold mb-2">{v.title}</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {v.body}
-                    </p>
+                    <div>
+                      {v.body.map((paragraph, i) => (
+                        <p
+                          key={i}
+                          className="text-sm text-muted-foreground leading-relaxed"
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -111,51 +128,59 @@ export default function AboutPage() {
                 Profile
               </p>
 
-              {/* Avatar + name */}
-              <div className="flex items-center gap-4 mb-6">
-                <Image src="/me.png" alt="Hayate Takeda" width={64} height={64} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
-                <div>
-                  <p className="text-base font-semibold">Hayate Takeda</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
+              {/* Avatar + name + SNS icons */}
+              <div className="flex gap-4 mb-6">
+                <Image
+                  src="/me.png"
+                  alt="Hayate Takeda"
+                  width={64}
+                  height={64}
+                  className="w-16 h-16 rounded-full object-cover flex-shrink-0"
+                />
+                <div className="flex-1">
+                  <p className="text-base font-semibold mb-1">Hayate Takeda</p>
+                  <p className="text-xs text-muted-foreground mb-2">
                     24歳 / フリーランスエンジニア
                   </p>
+                  <div className="flex items-center gap-2">
+                    {sns.map(({ label, href, icon: Icon }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-foreground transition-colors duration-300 relative group"
+                        aria-label={label}
+                      >
+                        <Icon className="w-4 h-4" />
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-foreground text-background text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                          {label}
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
 
               <div className="space-y-4 text-sm text-muted-foreground leading-relaxed mb-8">
                 <p>
-                  独立系SIerにてキャリアをスタート。航空・電力・製造業界を中心に、
-                  業務システムの要件定義から設計・開発・運用保守まで一貫して担当。
+                  22歳 / 鳥取県出身のエンジニア。
+                  <br />
+                  専門学校でIT技術を学び、20歳でIT業界へ。
                 </p>
                 <p>
-                  上流工程では業務ヒアリングや要件整理を主導し、下流工程では
-                  フロントエンド〜バックエンドを横断して実装。
-                  「なんでもできる一人目」の動き方を得意とします。
+                  SESとして電力・公共インフラ領域の現場に携わるなかで、
+                  GISシステムの開発・DX支援に従事。
+                  <br />
+                  要件定義から設計・開発・納品まで一貫して担当できるよう、
+                  上流から下流まで自分から取りにいってきた。
+                  <br />
                 </p>
                 <p>
-                  現在はフリーランスとして活動中。DXの文脈でスクラッチ開発から
-                  既存システムのリプレイスまで、幅広い案件に対応しています。
+                  現在は、大手測量会社にて、バックエンドエンジニアとして、
+                  <br />
+                  電力DX案件の要件定義を行っています。
                 </p>
-              </div>
-
-              {/* SNS links */}
-              <div className="flex flex-col gap-2">
-                {sns.map(({ label, href, icon: Icon, handle }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group w-fit"
-                  >
-                    <Icon className="w-4 h-4 flex-shrink-0" />
-                    <span className="font-medium">{label}</span>
-                    <span className="text-xs text-muted-foreground/60 group-hover:text-muted-foreground transition-colors duration-300">
-                      {handle}
-                    </span>
-                    <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                  </a>
-                ))}
               </div>
             </div>
 
@@ -187,7 +212,7 @@ export default function AboutPage() {
           </div>
 
           {/* CTA */}
-          <div className="border-t border-foreground/5 pt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <div className="border-t border-foreground/5 pt-28 flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <div className="flex-1">
               <p className="text-lg font-semibold mb-1">一緒に働きませんか</p>
               <p className="text-sm text-muted-foreground">

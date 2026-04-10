@@ -1,3 +1,6 @@
+/**
+ * インポート
+ */
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ExternalLink } from "lucide-react";
@@ -27,19 +30,6 @@ const sns = [
   },
 ];
 
-const skills = [
-  {
-    category: "Frontend",
-    items: ["TypeScript", "React", "Next.js", "Tailwind CSS"],
-  },
-  { category: "Backend", items: ["Node.js", "Python", "REST API", "SQL"] },
-  {
-    category: "Process",
-    items: ["要件定義", "基本設計", "詳細設計", "ユーザーテスト"],
-  },
-  { category: "Domain", items: ["航空", "電力", "製造", "公共DX"] },
-];
-
 export const revalidate = 3600;
 
 export default async function Home() {
@@ -60,50 +50,46 @@ export default async function Home() {
 
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             {/* Available badge */}
-            {/* <div className="inline-flex items-center gap-2 bg-foreground/5 border border-foreground/10 rounded-full px-4 py-2 mb-10">
+            <div className="inline-flex items-center gap-2 bg-foreground/5 border border-foreground/10 rounded-full px-4 py-2 mb-10">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
               <span className="text-xs font-medium text-muted-foreground">
-                Available for new projects
+                現在、新規案件を受け付けています
               </span>
-            </div> */}
+            </div>
 
             {/* Heading */}
             <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.1] mb-6">
-              <span className="block">公共・製造DXを、</span>
+              <span className="block">技術を手段に、</span>
               <span className="block mt-2 relative inline-block">
-                自走で主導する。
+                プロジェクトを動かす。
                 <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-foreground/20 via-foreground/60 to-foreground/20 rounded-full" />
               </span>
             </h1>
 
             {/* Sub copy */}
             <p className="text-sm text-muted-foreground leading-relaxed max-w-lg mt-8 mb-12">
-              要件定義から設計・開発・納品まで一人で主導できるエンジニア。
+              電力・公共インフラ領域で、要件定義から実装まで一貫して担当。
               <br />
-              「プロジェクトを前に進める」を最優先の価値として動きます。
+              「技術で課題を解く」ことを軸に動く、22歳のエンジニアです。
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 max-w-md border border-foreground/10 rounded-lg overflow-hidden mb-12">
-              <div className="px-6 py-5">
-                <p className="text-2xl font-bold tracking-tight">10+</p>
+            <div className="grid grid-cols-3 max-w-lg border border-foreground/10 rounded-lg overflow-hidden mb-12">
+              <div className="relative px-8 py-6">
+                <div className="absolute left-0 top-3 bottom-3 w-px bg-gradient-to-b from-transparent via-foreground/10 to-transparent" />
+                <p className="text-2xl font-bold tracking-tight">3 +</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  業界経験年数
+                </p>
+              </div>
+              <div className="px-8 py-6">
+                <p className="text-2xl font-bold tracking-tight">10 +</p>
                 <p className="text-xs text-muted-foreground mt-1">支援案件数</p>
               </div>
-              <div className="relative px-6 py-5">
+              <div className="relative px-8 py-6">
                 <div className="absolute left-0 top-3 bottom-3 w-px bg-gradient-to-b from-transparent via-foreground/10 to-transparent" />
-                <p className="text-2xl font-bold tracking-tight">5+</p>
+                <p className="text-2xl font-bold tracking-tight">5 +</p>
                 <p className="text-xs text-muted-foreground mt-1">対応領域</p>
-              </div>
-              <div className="relative px-6 py-5">
-                <div className="absolute left-0 top-3 bottom-3 w-px bg-gradient-to-b from-transparent via-foreground/10 to-transparent" />
-                <p className="text-sm font-semibold leading-tight mt-1">
-                  要件定義
-                  <br />
-                  〜運用
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  対応フェーズ
-                </p>
               </div>
             </div>
 
@@ -120,7 +106,7 @@ export default async function Home() {
                 href="/about"
                 className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group"
               >
-                About
+                About me
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-300" />
               </Link>
             </div>
@@ -291,118 +277,92 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-              {/* Profile */}
-              <div>
-                {/* Avatar + name */}
-                <div className="flex items-center gap-4 mb-6">
-                  <Image
-                    src="/me.png"
-                    alt="Hayate Takeda"
-                    width={64}
-                    height={64}
-                    className="w-16 h-16 rounded-full object-cover flex-shrink-0"
-                  />
-                  <div>
-                    <p className="text-base font-semibold">Hayate Takeda</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      24歳 / フリーランスエンジニア
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-4 text-sm text-muted-foreground leading-relaxed mb-8">
-                  <p>
-                    独立系SIerにてキャリアをスタート。航空・電力・製造業界を中心に、
-                    業務システムの要件定義から設計・開発・運用保守まで一貫して担当。
-                  </p>
-                  <p>
-                    上流工程では業務ヒアリングや要件整理を主導し、下流工程では
-                    フロントエンド〜バックエンドを横断して実装。
-                    「なんでもできる一人目」の動き方を得意とします。
-                  </p>
-                  <p>
-                    現在はフリーランスとして活動中。DXの文脈でスクラッチ開発から
-                    既存システムのリプレイスまで、幅広い案件に対応しています。
-                  </p>
-                </div>
-
-                {/* SNS links */}
-                <div className="flex flex-col gap-2">
-                  {sns.map(({ label, href, icon: Icon, handle }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group w-fit"
-                    >
-                      <Icon className="w-4 h-4 flex-shrink-0" />
-                      <span className="font-medium">{label}</span>
-                      <span className="text-xs text-muted-foreground/60 group-hover:text-muted-foreground transition-colors duration-300">
-                        {handle}
-                      </span>
-                      <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Skills */}
-              <div>
-                <div className="space-y-6">
-                  {skills.map((s) => (
-                    <div key={s.category}>
-                      <p className="text-xs text-muted-foreground mb-2">
-                        {s.category}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {s.items.map((item) => (
-                          <span
-                            key={item}
-                            className="inline-block text-xs font-medium bg-foreground/5 border border-foreground/5 rounded-full px-3 py-1"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div className="border-t border-foreground/5 pt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div>
+              {/* Avatar + name + SNS icons */}
+              <div className="flex items-center gap-4 mb-8">
+                <Image
+                  src="/me.png"
+                  alt="Hayate Takeda"
+                  width={64}
+                  height={64}
+                  className="w-16 h-16 rounded-full object-cover flex-shrink-0"
+                />
                 <div className="flex-1">
-                  <p className="text-lg font-semibold mb-1">
-                    一緒に働きませんか
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    現在、新規案件のご相談を受け付けています。
+                  <div className="flex items-center gap-3 mb-1">
+                    <p className="text-base font-semibold">Hayate Takeda</p>
+                    <div className="flex items-center gap-2">
+                      {sns.map(({ label, href, icon: Icon }) => (
+                        <a
+                          key={label}
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+                          title={label}
+                        >
+                          <Icon className="w-4 h-4" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    22歳 / GISエンジニア・バックエンドエンジニア
                   </p>
                 </div>
-                <div className="flex items-center gap-4">
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity duration-300"
-                  >
-                    お問い合わせ
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <Link
-                    href="/works"
-                    className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group"
-                  >
-                    実績を見る
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-300" />
-                  </Link>
-                </div>
+              </div>
+
+              <div className="space-y-4 text-sm text-muted-foreground leading-relaxed mb-8">
+                <p>
+                  22歳 / 鳥取県出身のエンジニア。
+                  <br />
+                  専門学校でIT技術を学び、20歳でIT業界へ。
+                </p>
+                <p>
+                  SESとして電力・公共インフラ領域の現場に携わるなかで、
+                  GISシステムの開発・DX支援に従事。
+                  <br />
+                  要件定義から設計・開発・納品まで一貫して担当できるよう、
+                  上流から下流まで自分から取りにいってきた。
+                  <br />
+                </p>
+                <p>
+                  現在は、大手測量会社にて、バックエンドエンジニアとして、
+                  <br />
+                  電力DX案件の要件定義を行っています。
+                </p>
               </div>
             </div>
           </div>
         </section>
-      </main>
 
+        {/* CTA */}
+        <section className="py-24 lg:py-32 border-t border-foreground/5">
+          <div className="max-w-6xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="flex-1">
+              <p className="text-lg font-semibold mb-1">一緒に働きませんか</p>
+              <p className="text-sm text-muted-foreground">
+                現在、新規案件のご相談を受け付けています。
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity duration-300"
+              >
+                お問い合わせ
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/works"
+                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+              >
+                実績を見る
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-300" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
       <Footer />
     </>
   );

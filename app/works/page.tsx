@@ -18,13 +18,13 @@ export default function WorksPage() {
             Works
           </p>
           <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-6">
-            実績一覧
+            実績
           </h1>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-24">
             要件定義から運用まで一人で主導できるエンジニアを目指しています。
+            <br />
             技術は手段であり、目的は常に「現場の課題を解決すること」です。
           </p>
-
           {/* Works list */}
           <div className="mb-24">
             <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-10">
@@ -84,7 +84,7 @@ export default function WorksPage() {
           </div>
 
           {/* CTA */}
-          <div className="border-t border-foreground/5 pt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <div className="border-t border-foreground/5 pt-28 flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <div className="flex-1">
               <p className="text-lg font-semibold mb-1">一緒に働きませんか</p>
               <p className="text-sm text-muted-foreground">
